@@ -54,10 +54,10 @@ class OpeningScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        loginButton,
+        registerButton,
         Padding(
           padding: EdgeInsets.fromLTRB(0, 30, 0, 80),
-          child: registerButton,
+          child: loginButton,
         )
       ],
     );
