@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furaha_app/theme/routes.dart';
 
 class OpeningScreen extends StatelessWidget {
   @override
@@ -26,7 +27,7 @@ class OpeningScreen extends StatelessWidget {
               fontSize: 20.0, color: Colors.white, fontWeight: FontWeight.bold),
         ),
         onPressed: () {
-          print("Login Pressed");
+          Navigator.of(context).pushNamed(AppRoutes.authLogin);
         },
       ),
     );
@@ -45,7 +46,7 @@ class OpeningScreen extends StatelessWidget {
               fontSize: 20.0, color: Colors.white, fontWeight: FontWeight.bold),
         ),
         onPressed: () {
-          print("Register Pressed");
+          Navigator.of(context).pushNamed(AppRoutes.authRegister);
         },
       ),
     );
@@ -63,26 +64,33 @@ class OpeningScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: Color(0XFFFFFEBEE),
+      // 0XFFFFFEBEE
+      backgroundColor: Color(0xFFE1F5FE),
       body: Padding(
         padding: EdgeInsets.all(30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            // Text(
-            //   'Welcome to Furaha',
-            //   textAlign: TextAlign.center,
-
-            //   style: TextStyle(
-            //       fontSize: 40.0,
-            //       color: Colors.black,
-            //       fontWeight: FontWeight.bold),
-            // ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text(
+              'Welcome to Furaha',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 40.0,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
             Padding(
-              padding: EdgeInsets.only(top: 100),
+              padding: EdgeInsets.only(top: 0),
               child: logo,
             ),
-
+            Text(
+              'Starting is the first step in your journey towards mental wellness. We are happy to be a trusted companion in your journey.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18.0,
+              ),
+            ),
             buttons,
           ],
         ),
