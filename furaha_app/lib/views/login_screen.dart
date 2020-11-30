@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furaha_app/theme/routes.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -40,17 +41,15 @@ class _LoginViewState extends State<Login> {
     );
 
     final emailField = TextFormField(
-      enabled: isSubmitting,
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       style: TextStyle(
-        color: Colors.white,
+        color: Colors.black,
       ),
       decoration: InputDecoration(
-        hintText: 'johndoe@gmail.com',
         labelText: "Email Address",
         hintStyle: TextStyle(
-          color: Colors.white,
+          color: Colors.black,
         ),
       ),
     );
@@ -58,17 +57,15 @@ class _LoginViewState extends State<Login> {
     final passwordField = Column(
       children: <Widget>[
         TextFormField(
-          enabled: isSubmitting,
           controller: _passwordController,
-          keyboardType: TextInputType.visiblePassword,
+          // keyboardType: TextInputType.visiblePassword,
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
           ),
           decoration: InputDecoration(
-            hintText: 'Password',
             labelText: "Password",
             hintStyle: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
         ),
@@ -129,6 +126,9 @@ class _LoginViewState extends State<Login> {
                   .copyWith(color: Colors.blue[700]),
             ),
             MaterialButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.authRegister);
+              },
               child: Text(
                 'Sign Up',
                 style: Theme.of(context).textTheme.subtitle1.copyWith(
@@ -158,7 +158,9 @@ class _LoginViewState extends State<Login> {
                 welcomeImg,
                 Padding(padding: EdgeInsets.only(top: 30.0)),
                 fields,
+                Padding(padding: EdgeInsets.only(top: 30.0)),
                 loginButton,
+                Padding(padding: EdgeInsets.only(bottom: 20.0)),
                 bottom,
               ],
             ),
