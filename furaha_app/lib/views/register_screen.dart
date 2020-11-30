@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furaha_app/theme/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -8,8 +9,10 @@ class Register extends StatefulWidget {
 
 class _RegisterViewState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _usernameController;
   TextEditingController _emailController;
   TextEditingController _passwordController;
+  TextEditingController _confirmPasswordController;
   bool isSubmitting = false;
 
   @override
@@ -23,21 +26,27 @@ class _RegisterViewState extends State<Register> {
       height: 80.0,
     );
 
-    final welcomeImg = Image.asset(
-      "assets/welcome.png",
-      fit: BoxFit.fill,
-      height: 150.0,
-      width: 150.0,
-    );
-
     final welcomeMsg = Column(
       children: <Widget>[
         Text(
-          'Welcome Back to Furaha',
+          'Create an account with us today for free',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
         ),
       ],
+    );
+
+    final userNameField = TextFormField(
+      controller: _usernameController,
+      style: TextStyle(
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+        labelText: "Full Name",
+        hintStyle: TextStyle(
+          color: Colors.black,
+        ),
+      ),
     );
 
     final emailField = TextFormField(
@@ -58,6 +67,7 @@ class _RegisterViewState extends State<Register> {
       children: <Widget>[
         TextFormField(
           controller: _passwordController,
+          obscureText: true,
           // keyboardType: TextInputType.visiblePassword,
           style: TextStyle(
             color: Colors.black,
@@ -75,19 +85,42 @@ class _RegisterViewState extends State<Register> {
       ],
     );
 
+    final confirmPasswordField = Column(
+      children: <Widget>[
+        TextFormField(
+          controller: _confirmPasswordController,
+          obscureText: true,
+          // keyboardType: TextInputType.visiblePassword,
+          style: TextStyle(
+            color: Colors.black,
+          ),
+          decoration: InputDecoration(
+            labelText: "Confirm Password",
+            hintStyle: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(2.0),
+        ),
+      ],
+    );
     final fields = Padding(
       padding: EdgeInsets.all(13.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
+          //userName,
+          userNameField,
           emailField,
           passwordField,
-          //user password
+          confirmPasswordField,
         ],
       ),
     );
 
-    final loginButton = Material(
+    final registerButton = Material(
       elevation: 4.0,
       borderRadius: BorderRadius.circular(17.0),
       color: Colors.blue,
@@ -95,13 +128,30 @@ class _RegisterViewState extends State<Register> {
         minWidth: mq.size.width / 1.7,
         padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 15.0),
         child: Text(
-          'Login',
+          'Register',
           textAlign: TextAlign.center,
           style: TextStyle(
               fontSize: 20.0, color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        onPressed: () {
+        onPressed: () async {
           // Navigator.of(context).pushNamed(AppRoutes.authRegister);
+          try {
+            User user =
+                (await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: _emailController.text,
+              password: _passwordController.text,
+            ))
+                    .user;
+
+            if (user != null) {}
+          } catch (e) {
+            print(e);
+            //alert error
+            _usernameController.text = "";
+            _emailController.text = "";
+            _passwordController.text = "";
+            _confirmPasswordController.text = "";
+          }
         },
       ),
     );
@@ -119,7 +169,7 @@ class _RegisterViewState extends State<Register> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Text(
-              "Don't have an account?",
+              "Already have an account?",
               style: Theme.of(context)
                   .textTheme
                   .subtitle1
@@ -130,7 +180,7 @@ class _RegisterViewState extends State<Register> {
                 Navigator.of(context).pushNamed(AppRoutes.authLogin);
               },
               child: Text(
-                'Sign Up',
+                'Login',
                 style: Theme.of(context).textTheme.subtitle1.copyWith(
                     color: Colors.blue[700],
                     decoration: TextDecoration.underline),
@@ -155,11 +205,9 @@ class _RegisterViewState extends State<Register> {
                 Padding(padding: EdgeInsets.only(top: 40.0)),
                 welcomeMsg,
                 Padding(padding: EdgeInsets.only(top: 30.0)),
-                welcomeImg,
-                Padding(padding: EdgeInsets.only(top: 30.0)),
                 fields,
                 Padding(padding: EdgeInsets.only(top: 30.0)),
-                loginButton,
+                registerButton,
                 Padding(padding: EdgeInsets.only(bottom: 20.0)),
                 bottom,
               ],

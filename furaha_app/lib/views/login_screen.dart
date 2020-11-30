@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:furaha_app/theme/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -58,6 +59,7 @@ class _LoginViewState extends State<Login> {
       children: <Widget>[
         TextFormField(
           controller: _passwordController,
+          obscureText: true,
           // keyboardType: TextInputType.visiblePassword,
           style: TextStyle(
             color: Colors.black,

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "658414987232",
+    "firebase_url": "https://furaha-5899b.firebaseio.com",
+    "project_id": "furaha-5899b",
+    "storage_bucket": "furaha-5899b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658414987232:android:dc37aabffd23e09b5e6d85",
+        "android_client_info": {
+          "package_name": "com.example.furaha_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658414987232-3rlbhjbj35lm7n7lucolamvhsad6512g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdQfMwFYfADiTK1WHhDlHE69Tzde563s0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658414987232-3rlbhjbj35lm7n7lucolamvhsad6512g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
